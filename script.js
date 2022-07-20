@@ -7,10 +7,10 @@ const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 
 const container = document.querySelector(".content");
-const bookBox = document.querySelector(".book-box");
+const bookBox = document.querySelectorAll("book-box");
 const boxContent = document.querySelector(".box-content");
 
-const deleteBtn = document.querySelector(".close-btn");
+const deleteBtn = document.querySelectorAll(".book-btn");
 
 let myLibrary = [];
 
@@ -35,17 +35,25 @@ function addToLibrary() {
 
     titleName.classList.add("box-content");
     content.classList.add("book-box");
-    removeBtn.classList.add("close-btn");
+    removeBtn.classList.add("book-btn");
 
     content.appendChild(removeBtn);
     container.appendChild(content);
     content.appendChild(titleName);
 
-    titleName.innerHTML = `<h1>${title.value}</h1>`;
+    titleName.innerHTML = `<h1>${title.value}</h1> <h1>${author.value}</h1> <h1>${pages.value}</h1>`;
+    removeBtn.textContent = "X";
   });
-  deleteBtn.addEventListener("click", (e) => {
-    console.log("fluu", e);
+
+  container.addEventListener("click", (e) => {
+    if (e.target.classList.contains("book-btn")) {
+      console.log("hello");
+      console.log(e.path[0].parentElement.remove());
+    }
   });
 }
 
 addToLibrary();
+console.log(deleteBtn);
+
+console.log(Array.from(deleteBtn));
